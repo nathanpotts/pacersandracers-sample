@@ -1,4 +1,18 @@
 <?php
+
+/* 
+File Created By: Nathan Potts
+
+*/
+
+
+/*
+This function controls the left column information in the race form which is the race information. 
+The args function takes a post_id, and a context on if it is a race_result. 
+It also calls several child functions that are listed below. 
+
+$args is an associated array that contains a post_id and a context.
+*/
 function pr_race_information($args){
 $post_id = $args['post_id'];
 $race_calendar_event = get_post_type($post_id) == 'race_calendar_event';
@@ -65,6 +79,12 @@ $race_info = "<div id='race_information' class='col-xs-12'>";
 			$race_info .= "</div>"; //End of Race Info
 			return $race_info;
 }
+
+/*
+This function handles the displaying of time on the race_form. It uses a post_id from $args. 
+
+$args is an associated array that contains a post_id and a context.
+*/
 function pr_race_time($args){
 $race_info = "<div id='pacer_race_time' class='col-md-12 pacerracer_form_container col-xs-12'>";
 			//$race_info .= "<div class='col-xs-5 col-md-6'>";
@@ -95,6 +115,10 @@ $race_info = "<div id='pacer_race_time' class='col-md-12 pacerracer_form_contain
 			return $race_info;
 }
 
+/*
+This function displays the information on the right column for the “Your Information” column. 
+It also fills the data in, if it is on the edit screen
+*/
 function pr_race_user_info($args){
 if($args['admin'] == true && $args['edit'] == false){
 $username = get_option('default-form-name');
@@ -125,6 +149,12 @@ $email = get_post_meta($post_id, 'user_email', true);
 			
 			return $race_info;
 }
+
+/*
+This function displays the two dropdowns for approving a race and race sponsorship. 
+It only appears on the admin screen and appears on the race calendar and race results 
+admin edit and add new screens. 
+*/
 function pr_race_admin_form($args){
 $post_id = $args['post_id'];
 $admin_form = "<div id='admin_form_container' class=''>";
@@ -152,6 +182,11 @@ $admin_form .= "</div>"; //End of Admin Form Container
 
 return $admin_form;
 }
+
+/*
+This function controls the preferred contact dropdown and the dropdowns associated with it for the race calendar form. 
+It outputs html and it takes $args and contains post_id and a check to see if it’s an edit screen.
+*/
 function pr_prefered_contact_form($args){
 			//print_r($args);
 			//Prefered Contact Methods
@@ -199,6 +234,12 @@ function pr_prefered_contact_form($args){
 
 return $race_info;
 }
+
+
+/*  
+This function displays the html for the document upload for the results submission form. 
+It returns html and it takes $args that contains a post_id.
+*/
 function pr_results_form($args){
 			//var_dump($args);
 			$post_id = $args['post_id'];
